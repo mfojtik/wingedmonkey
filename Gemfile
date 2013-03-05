@@ -2,6 +2,9 @@ source "https://rubygems.org"
 
 gem 'rails'
 
+gem 'deltacloud-core', '>=1.1.1'
+gem 'deltacloud-client', '>=1.1.1'
+
 gem 'thin'
 
 gem 'jquery-rails'

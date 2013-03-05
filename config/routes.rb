@@ -14,6 +14,9 @@
 Rails.application.routes.draw do
   root to: "provider_applications#index"
 
+  match '/api' => Deltacloud::API, :anchor => false
+  match 'test', :to => 'sample#index'
+
   resources :launchables
   resources :provider_applications do
     get 'launch_summary', :on => :member
