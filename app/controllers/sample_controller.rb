@@ -11,24 +11,20 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-Rails.application.routes.draw do
-  root to: "provider_applications#index"
+# Example Deltacloud API controller
+#
+class SampleController < ApplicationController
 
-  match '/api' => Deltacloud::API, :anchor => false
-  match 'test', :to => 'sample#index'
-
-  resources :launchables
-  resources :provider_applications do
-    get 'launch_summary', :on => :member
-    post 'start', :on => :member
-    post 'stop', :on => :member
-    post 'pause', :on => :member
+  def index
+    # This can be better, I sux in Rails ;-)
+    # Like a Helper class or something. Also 'http' should not be hardcoded ;-)
+    #
+    # Also see https://github.com/mifo/deltacloud-client
+    # This will become a new superb Deltacloud API client (as soon as I finish
+    # tests).
+    #
+    client = DeltaCloud.new('mockuser', 'mockpassword', "http://#{request.host_with_port}/api")
+    client.instances.inspect
   end
-
-  match 'login',       :to => 'sessions#new',     :as => 'login'
-  match 'logout',      :to => 'sessions#destroy', :as => 'logout'
-  resources :sessions
-
-  post "providers/select"
 
 end
