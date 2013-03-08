@@ -23,19 +23,29 @@ module ProviderModel
 
   def provider_model
     provider_type = Provider.current.type.camelize
-    model_name = self.name
-    Providers.const_get(provider_type).const_get(provider_type+model_name)
+    class_name = provider_type + self.name
+    provider_module = Providers.const_get(provider_type)
+    if provider_module.const_defined?(class_name) &&
+        provider_module.const_get(class_name).class == Class
+      provider_module.const_get(class_name)
+    else
+      nil
+    end
   end
 
   def all
-    provider_model.all
+    provider_model.nil? ? nil :
+      provider_model.all
   end
 
   def find id
-    provider_model.find id
+    provider_model.nil? ? nil :
+      (provider_model.find id)
   end
 
   def create attributes
-    provider_model.new attributes
+    provider_model.nil? ? nil :
+      (provider_model.new attributes)
   end
+
 end
