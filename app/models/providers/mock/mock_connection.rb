@@ -20,7 +20,9 @@ module Providers::Mock
     @@provider_applications = []
     @@id = 1
 
+    MOCK_CONFIG = YAML.load_file(File.join("#{Rails.root}", "config", "mock", "config.yml"))
     MOCK_LAUNCHABLE_CONFIG = YAML.load_file(File.join("#{Rails.root}", "config", "mock", "launchables.yml"))
+
     def launchables
       MOCK_LAUNCHABLE_CONFIG
     end
@@ -30,13 +32,25 @@ module Providers::Mock
     end
 
     def add_application(application)
-      application.id = @@id
-      @@id += 1
-      @@provider_applications << application
+      if application_count >= max_application_count
+        raise _("Application limit for mock provider reached.")
+      else
+        application.id = @@id
+        @@id += 1
+        @@provider_applications << application
+      end
     end
 
     def destroy_application(application)
       @@provider_applications.delete(application)
+    end
+
+    def application_count
+      applications.count
+    end
+
+    def max_application_count
+      MOCK_CONFIG[:max_applications]
     end
   end
 end
