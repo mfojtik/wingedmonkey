@@ -12,6 +12,8 @@
 # under the License.
 
 require 'providers/conductor/conductor_provider'
+require 'providers/conductor/conductor_provider_application'
+require 'providers/conductor/conductor_launchable'
 
 module Providers
   module Conductor

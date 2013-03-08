@@ -12,6 +12,9 @@
 # under the License.
 
 require 'providers/mock/mock_provider'
+require 'providers/mock/mock_provider_application'
+require 'providers/mock/mock_launchable'
+require 'providers/mock/mock_quota'
 
 module Providers
   module Mock

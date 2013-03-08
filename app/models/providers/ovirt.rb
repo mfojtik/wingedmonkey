@@ -12,6 +12,8 @@
 # under the License.
 
 require 'providers/ovirt/ovirt_provider'
+require 'providers/ovirt/ovirt_provider_application'
+require 'providers/ovirt/ovirt_launchable'
 
 module Providers
   module Ovirt

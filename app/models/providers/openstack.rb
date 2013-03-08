@@ -14,6 +14,7 @@
 require 'providers/openstack/openstack_provider'
 require 'providers/openstack/openstack_provider_application'
 require 'providers/openstack/openstack_launchable'
+require 'providers/openstack/openstack_quota'
 
 module Providers
   module OpenStack
