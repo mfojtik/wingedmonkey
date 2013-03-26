@@ -1,15 +1,11 @@
-#quota
-  .global_indicator
+- if current_quotas
+  #quota
+    .global_indicator
 
-  %table.details
-    %tr#instances
-      %td Instances
-      %td
-        .indicator
-      %td 10 / 20 instances
-
-    %tr#cpu
-      %td CPU
-      %td
-        .indicator.warning
-      %td 3 / 15 units
+    %table.details
+      - current_quotas.each do |quota|
+        %tr{ :id => "#{quota.name}"}
+          %td= quota.name
+          %td
+            %div{ :class => "indicator #{quota.status}" }
+          %td= "#{quota.usage} / #{quota.limit} #{quota.unit}"

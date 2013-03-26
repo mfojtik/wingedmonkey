@@ -22,6 +22,10 @@ class Quota
   #more to be added as needed
   attr_accessor :id, :name, :usage, :limit, :unit
 
+  QUOTA_STATUS_OKAY = ""
+  QUOTA_STATUS_WARNING = "warning"
+  QUOTA_STATUS_DANGER = "danger"
+
   def initialize(attributes = {})
     attributes.each do |name, value|
       send("#{name}=", value)
@@ -32,4 +36,12 @@ class Quota
     false
   end
 
+  def status
+    percent_usage = usage / limit
+    case
+      when percent_usage >= 0.9 then Quota::QUOTA_STATUS_DANGER
+      when percent_usage >= 0.75 then Quota::QUOTA_STATUS_WARNING
+      else Quota::QUOTA_STATUS_OKAY
+    end
+  end
 end

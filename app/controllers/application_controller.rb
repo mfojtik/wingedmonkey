@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_provider
   helper_method :current_provider_id
+  helper_method :current_quotas
 
   rescue_from Exception, :with => :handle_error
 
@@ -43,6 +44,10 @@ class ApplicationController < ActionController::Base
 
   def current_provider
     Provider.find(session[:current_provider_id])
+  end
+
+  def current_quotas
+    Quota.all if current_provider.present?
   end
 
   def handle_error(error)
