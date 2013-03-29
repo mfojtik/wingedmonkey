@@ -37,11 +37,14 @@ class Quota
   end
 
   def status
-    percent_usage = usage / limit
     case
-      when percent_usage >= 0.9 then Quota::QUOTA_STATUS_DANGER
-      when percent_usage >= 0.75 then Quota::QUOTA_STATUS_WARNING
+      when percent_usage >= 90 then Quota::QUOTA_STATUS_DANGER
+      when percent_usage >= 75 then Quota::QUOTA_STATUS_WARNING
       else Quota::QUOTA_STATUS_OKAY
     end
+  end
+
+  def percent_usage
+    100.0 * usage / limit
   end
 end
