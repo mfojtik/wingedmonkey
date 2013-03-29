@@ -1,9 +1,9 @@
-- if current_quotas
+- if @quotas.present?
   #quota
     .global_indicator
 
     %table.details
-      - current_quotas.each do |quota|
+      - @quotas.each do |quota|
         %tr{ :id => "#{quota.name}"}
           %td= quota.name
           %td
