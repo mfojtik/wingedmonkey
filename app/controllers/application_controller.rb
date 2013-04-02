@@ -15,10 +15,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :require_provider_authentication
   before_filter :set_provider_locale
+  before_filter :load_quotas
 
   helper_method :current_provider
   helper_method :current_provider_id
-  helper_method :current_quotas
 
   rescue_from Exception, :with => :handle_error
 
@@ -46,10 +46,6 @@ class ApplicationController < ActionController::Base
     Provider.find(session[:current_provider_id])
   end
 
-  def current_quotas
-    Quota.all if current_provider.present?
-  end
-
   def handle_error(error)
     Rails.logger.send(:error, error.backtrace.join("\n\t"))
     respond_to do |format|
@@ -64,6 +60,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def load_quotas
+    @quotas = Quota.all if current_provider.present?
+  end
 
   def set_provider_locale
     I18n.locale = "#{I18n.locale[0,2]}_#{current_provider.locale_id}" if current_provider.present?

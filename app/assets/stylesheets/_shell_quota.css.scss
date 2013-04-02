@@ -14,8 +14,7 @@
     @include transition(all 0.05s ease-in-out);
 
     // box for value vizualization
-    &:before {
-      content: '';
+    .gauge {
       width: 50%;
       height: 100%;
       position: absolute;
@@ -24,11 +23,11 @@
       @include background(linear-gradient(lighten($success_color, 5%), darken($success_color, 8%)));
     }
 
-    &.warning:before {
+    &.warning .gauge {
       @include background(linear-gradient(lighten($warning_color, 5%), darken($warning_color, 8%)));
     }
 
-     &.danger:before {
+    &.danger .gauge {
       @include background(linear-gradient(lighten($error_color, 5%), darken($error_color, 8%)));
     }
   }
@@ -36,7 +35,7 @@
   .global_indicator {
     @include opacity(0.8);
 
-    &:before {
+    .gauge {
       @include background(linear-gradient(lighten($primary_color, 5%), darken($primary_color, 8%)));
     }
   }
