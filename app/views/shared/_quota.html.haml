@@ -1,0 +1,13 @@
+- if @quotas.present?
+  #quota
+    .global_indicator{ :class => "#{@quotas.first.status}" }
+      .gauge{ :style => "width: #{@quotas.first.percent_usage}%;"}
+
+    %table.details
+      - @quotas.each do |quota|
+        %tr{ :id => "#{quota.name}"}
+          %td= quota.name
+          %td
+            .indicator{ :class => "#{quota.status}" }
+              .gauge{ :style => "width: #{quota.percent_usage}%;"}
+          %td= "#{quota.usage} / #{quota.limit} #{quota.unit}"

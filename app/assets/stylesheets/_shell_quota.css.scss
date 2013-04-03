@@ -1,0 +1,125 @@
+#quota {
+  @include inline-block(baseline);
+  position: relative;
+  margin-right: 0.5em;
+
+  .global_indicator,
+  .indicator {
+    width: 35px;
+    height: 0.75em;
+    border: 1px solid rgba($primary_color, 0.3);
+    position: relative;
+    @include background(rgba($white_color, 0.6));
+    @include border-radius($border_radius);
+    @include transition(all 0.05s ease-in-out);
+
+    // box for value vizualization
+    .gauge {
+      width: 50%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      @include background(linear-gradient(lighten($success_color, 5%), darken($success_color, 8%)));
+    }
+
+    &.warning .gauge {
+      @include background(linear-gradient(lighten($warning_color, 5%), darken($warning_color, 8%)));
+    }
+
+    &.danger .gauge {
+      @include background(linear-gradient(lighten($error_color, 5%), darken($error_color, 8%)));
+    }
+  }
+
+  .global_indicator {
+    @include opacity(0.8);
+
+    .gauge {
+      @include background(linear-gradient(lighten($primary_color, 5%), darken($primary_color, 8%)));
+    }
+  }
+
+  .details {
+    display: none;
+    position: absolute;
+    left: -200%;
+    top: 18px;
+    @include linear_gradient($white_color, rgba($white_color, 0.8), lighten($g2, 5%), 90%);
+    @include border-radius($border-radius);
+    border: 1px solid $g2;
+    z-index: 1;
+    @include box-shadow(0 1px 2px rgba($black_color, 0.15),
+                        0 1em 3em rgba($black_color, 0.2),
+                        0 0 0 1px rgba($white_color, 0.05) inset);
+
+    tr {
+      &:first-child td {
+        padding-top: 0.75em;
+      }
+
+      &:last-child td {
+        padding-bottom: 0.75em;
+      }
+    }
+
+    td {
+      white-space: nowrap;
+      padding: 3px 5px;
+      vertical-align: middle;
+      color: $g5;
+
+      &:first-child {
+        text-align: right;
+        padding-left: 20px;
+        font-size: 85%;
+      }
+
+      &:last-child {
+        padding-right: 20px;
+      }
+
+      .indicator {
+        width: 100px;
+      }
+    }
+  }
+
+  // triangle for details box
+  &:before,
+  &:after {
+    display: none;
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 7px;
+    bottom: -11px;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 9px solid $white_color;
+    z-index: 3;
+  }
+
+  &:after {
+    bottom: -10px;
+    border-color: $g2 transparent;
+    z-index: 2;
+  }
+
+  //
+  &:hover {
+    .global_indicator {
+      @include opacity(0.9);
+    }
+
+    &:before,
+    &:after {
+      display: block;
+    }
+
+    .details {
+      display: block;
+    }
+  }
+}
