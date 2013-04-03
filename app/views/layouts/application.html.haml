@@ -15,21 +15,27 @@
       = render :partial => 'shared/flash_messages'
       %div{:'wm-flash-message' => "", :'ng-hide' => "!flashMessages.length"}
     #wrapper
+
       #header
         = link_to image_tag("logo.png"), root_url, :id => "logo"
         .controls
           - if authenticated?
+            = render :partial => 'shared/quota'
+
             %span.highlight= session[:current_provider_creds][:username]
             - if session[:current_provider_creds][:username].present?
               %span= "at"
             %span.highlight= current_provider.name
+
             %span= "(#{current_provider.type.camelize})"
             = link_to _("Log out"), logout_path, :class => "logout"
+
       #container
         #content
           = yield
         #sidebar
           = yield :sidebar if content_for? :sidebar
+
       #footer
         %span.info
           = _("Found a problem?")
