@@ -13,7 +13,7 @@
 
 class SessionsController < ApplicationController
   layout "login"
-  skip_before_filter :require_provider_authentication
+  skip_before_filter :require_provider_authentication, :load_quotas
 
   def new
   end

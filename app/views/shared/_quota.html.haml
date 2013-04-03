@@ -1,7 +1,7 @@
 - if @quotas.present?
   #quota
-    .global_indicator
-      .gauge
+    .global_indicator{ :class => "#{@quotas.first.status}" }
+      .gauge{ :style => "width: #{@quotas.first.percent_usage}%;"}
 
     %table.details
       - @quotas.each do |quota|
