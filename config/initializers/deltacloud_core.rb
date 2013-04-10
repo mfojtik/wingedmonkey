@@ -16,4 +16,4 @@ Deltacloud::configure do |server|
   server.klass 'Deltacloud::API'
 end
 
-Deltacloud[:deltacloud].require!
+Deltacloud[:deltacloud].require!(:mock_initialize => true)

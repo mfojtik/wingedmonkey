@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gem 'rails'
 
-gem 'deltacloud-core', '>=1.1.1'
+gem 'deltacloud-core', '>=1.1.3'
 gem 'deltacloud-client', '>=1.1.1'
 
 gem 'thin'
@@ -13,7 +13,6 @@ gem 'haml-rails'
 gem 'sass-rails'
 gem 'compass-rails'
 gem 'psych'
-gem 'rbovirt'
 gem 'openstack'
 gem 'gettext_i18n_rails'
 gem 'angular-rails'
@@ -21,8 +20,8 @@ gem 'sqlite3'
 gem 'rabl'
 gem 'oj'
 
-# gem "alchemy", "~> 1.0.0"
-gem 'alchemy', :git => 'git://github.com/ui-alchemy/alchemy.git', :branch => 'master'
+gem "alchemy", "=1.0.3"
+#gem 'alchemy', :git => 'git://github.com/ui-alchemy/alchemy.git', :branch => 'master'
 
 group :assets do
   gem 'therubyracer'
